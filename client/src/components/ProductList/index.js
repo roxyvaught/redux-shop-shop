@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { updateProducts } from "../../utils/redproducts";
 
 export default function ProductList() {
-  // const [state, dispatch] = useStoreContext();
+
   const state = useSelector((state) => state);
 
   const dispatch = useDispatch();
@@ -21,7 +21,6 @@ export default function ProductList() {
 
   useEffect(() => {
     if (data) {
-      // updateProducts(data.products);
       dispatch({
         type: UPDATE_PRODUCTS,
         products: data.products
@@ -30,11 +29,11 @@ export default function ProductList() {
       data.products.forEach((product) => {
         idbPromise("products", "put", product);
       });
-      // add else if to check if `loading` is undefined in `useQuery()` Hook
+
     } else if (!loading) {
-      // since we're offline, get all of the data from the `products` store
+
       idbPromise("products", "get").then((products) => {
-        // use retrieved data to set global state for offline browsing
+
         updateProducts(products);
       });
     }
